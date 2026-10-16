@@ -20,8 +20,10 @@ except ImportError:
     print("This script needs the pytools submodule. In the project folder run:\n"
           "    git submodule update --init\n"
           "then start it again.", file=sys.stderr)
-    if sys.stdin and sys.stdin.isatty():
+    try:
         input("\nPress Enter to close this window.")
+    except (EOFError, KeyboardInterrupt):   # no keyboard (run by another tool) — just exit
+        pass
     sys.exit(1)
 
 
